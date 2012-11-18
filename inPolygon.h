@@ -1,9 +1,11 @@
+#ifndef _POLYGON_H
+#define _POLYGON_H
+
 #include <math.h>
 #include <stdio.h>
 #include <stdlib.h>
 
 /*constant */
-const int N = 100;
 /*assume this is infinite far away*/
 const int offset = 1000;
 /*error bound */
@@ -12,9 +14,10 @@ const double eps = 1e-8;
 /*2D Point structure for clarity*/
 typedef struct {
     	double x; 
-		double y;
-	} point;
+	double y;
+} point;
 
+/*helper functions*/
 /*robust for float-point error*/
 bool isZero(double x) {
     return (x > 0 ? x : -x) < eps; 
@@ -45,11 +48,13 @@ bool inPolygon(point target, point *polygon, int n) {
         for (i=count=0; i<n; ++i) {
 			//judge if on the edge
             if (isZero(xmult(target,polygon[i],polygon[i+1]))&&
-            (polygon[i].x-target.x)*(polygon[i+1].x-target.x)<eps&&(polygon[i].y-target.y)*(polygon[i+1].y-target.y)<eps)
-                return true;
-			else if (isZero(xmult(target, p_far, polygon[i]))) break; //if ray pass the endpint, get another one
+        	    (polygon[i].x-target.x)*(polygon[i+1].x-target.x)<eps &&
+		    (polygon[i].y-target.y)*(polygon[i+1].y-target.y)<eps)
+                	return true;
+            else if (isZero(xmult(target, p_far, polygon[i]))) break; //if ray pass the endpint, get another one
             else if (xmult(polygon[i], polygon[i+1], target)*xmult(polygon[i], p_far, polygon[i+1])>eps && 
-                     xmult(target, p_far, polygon[i])*xmult(target, polygon[i+1], p_far)>eps)  ++count;
+                     xmult(target, p_far, polygon[i])*xmult(target, polygon[i+1], p_far)>eps) //intersect, add to the count 
+		    ++count;
         }
     }
     return count & 1 ? true: false;
@@ -85,43 +90,4 @@ int  detect_point(double x, double y, double *crdsx, double *crdsy, int n)
 }
 
 
-
-int main() {
-
-	//num of points
-    int N;
-	
-	scanf("%d",&N);
-	
-	double *coord_x = (double*) malloc(N*sizeof(double));
-	double *coord_y = (double*) malloc(N*sizeof(double));
-	
-    for (int i=0; i<N; ++i) 
-		scanf ("%lf%lf", &coord_x[i], &coord_y[i]);
-  
-    
-	
-	//simple test
-    double point_in_x = 0.00;
-	double point_in_y = 1.5;
-	
-	double point_out_x = -1.5;
-	double point_out_y = -1;
-       
-	//test in polygon point
-    if (detect_point(point_in_x,point_in_y,coord_x,coord_y,N) >0) 
-		printf ("Point (%lf,%lf) is inside the polygon\n", point_in_x,point_in_y);
-	else 
-		printf ("Point (%lf,%lf) is outside the polygon\n", point_in_x,point_in_y);
-    
-	//test outside polygon point
-	 if (detect_point(point_out_x,point_out_y,coord_x,coord_y,N) >0) 
-		printf ("Point (%lf,%lf) is inside the polygon\n", point_out_x,point_out_y);
-	else 
-		printf ("Point (%lf,%lf) is outside the polygon\n", point_out_x,point_out_y);
-	
-	//free memory
-	free(coord_x);
-	free(coord_y);
-    return 0;
-}
+#endif
