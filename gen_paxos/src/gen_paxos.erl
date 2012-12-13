@@ -102,7 +102,7 @@ coordinator( InitN, Others )->
             io:format("starting passive paxos: ~p~n", [{_From, subject, {Key,Value}}]),
             paxos_fsm:start( Key, InitN, Value, Others, [self()] );
         {_From, result, {Key, Value}}-> %% set done; send to reference
-            put( Key, Value );
+            put( Key, Value ); %%change to persisent storage?
         {_From, stop, normal}->
             exit( stop );
         Other ->
