@@ -4,7 +4,7 @@ ERL             ?=erl
 CT_RUN          ?=ct_run
 ERL_FLAGS       ?=+A10
 REBAR_FLAGS     :=
-
+REBAR =./rebar
 all: deps compile
 
 deps:
@@ -26,6 +26,6 @@ clean:
 distclean: clean
 	$(REBAR) delete-deps
 
-include rebar.mk
+#include rebar.mk
 
 .EXPORT_ALL_VARIABLES:
