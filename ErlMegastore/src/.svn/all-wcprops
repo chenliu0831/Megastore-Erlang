@@ -1,0 +1,35 @@
+K 25
+svn:wc:ra_dav:version-url
+V 35
+/svn/!svn/ver/16/trunk/erlpaxos/src
+END
+erlpaxosTest.erl
+K 25
+svn:wc:ra_dav:version-url
+V 52
+/svn/!svn/ver/16/trunk/erlpaxos/src/erlpaxosTest.erl
+END
+client.erl
+K 25
+svn:wc:ra_dav:version-url
+V 46
+/svn/!svn/ver/16/trunk/erlpaxos/src/client.erl
+END
+acceptor.erl
+K 25
+svn:wc:ra_dav:version-url
+V 48
+/svn/!svn/ver/15/trunk/erlpaxos/src/acceptor.erl
+END
+learner.erl
+K 25
+svn:wc:ra_dav:version-url
+V 47
+/svn/!svn/ver/16/trunk/erlpaxos/src/learner.erl
+END
+proposer.erl
+K 25
+svn:wc:ra_dav:version-url
+V 48
+/svn/!svn/ver/15/trunk/erlpaxos/src/proposer.erl
+END
